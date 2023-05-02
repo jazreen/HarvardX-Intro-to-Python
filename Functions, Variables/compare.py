@@ -1,3 +1,4 @@
+#doing comparisons in python
 x = int(input("x? "))
 y = int(input("y? "))
 
