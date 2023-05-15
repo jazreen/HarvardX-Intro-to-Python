@@ -1,0 +1,99 @@
+#TRY.....Except
+
+#ValueError
+
+#scenario: say we want an integer input but theres no guarantee the user will input an integer(could be word instead)
+#so this would cause a valueError when we try to apply int() to that input value so....
+try: 
+    x = int(input("What's x? "))
+    print(f"x is {x}")
+except ValueError:
+    #ValueError: when function receives argument with correct type but inappropriate value
+    print("x is not an integer")
+
+
+#NameError:when you try to use a variable, function, or module that doesn't exist or wasn't used in a valid way
+#the following piece of code would give a nameError if the input was a word instead of number
+try: 
+    x = int(input("What's x? "))
+except ValueError:
+    #ValueError: when function receives argument with correct type but inappropriate value
+    print("x is not an integer")
+
+print(f"x is {x}")
+#having the above line out of try block works if input is a number.
+#if input is a word, we get a valueError first, meaning x is never actually assigned a value
+#since the int() function will be throwing the error
+#so when we try to print x when input != number, we get a nameError because x doesnt have a value
+
+#solution: add an else block
+try: 
+    x = int(input("What's x? "))
+except ValueError:
+    print("x is not an integer")
+else:
+    print(f"x is {x}")
+#interpretation: 
+#we only go to the else block if valueError is NOT thrown in the try block
+#otherwise we just go to the except block
+
+
+#break command
+#if we want to keep asking the same question until desired answer given:
+while True: #infinite loop
+    try: 
+        x = int(input("What's x? "))
+    except ValueError:
+        print("x is not an integer")
+    else:
+        break #breaks out of while loop
+
+print(f"x is {x}")
+
+
+#alternative for the exact same thing:(gets rid of else)
+while True: 
+    try: 
+        x = int(input("What's x? "))
+        break
+    except ValueError:
+        print("x is not an integer")
+
+print(f"x is {x}")
+#why this works: if x is a word, we will go straight to the except block for valueError
+#and the code keeps going on in an infinite loop until a number is inputted
+#but if x is a number, the code will just continue to the next statement, which is a break
+
+#**if we made a function to collect an integer input, we could replace all the BREAK statements
+#with RETURN x statements****
+
+#PASS: used when we want to keep repeating the qs until we want the desired answer but dont
+#want to provide any reasoning or warning message if the initial input was undesireable
+while True: 
+    try: 
+        x = int(input("What's x? "))
+        break
+    except ValueError:
+        pass
+
+print(f"x is {x}")
+
+
+
+
+#if we were writing this as a function:
+
+def main():
+    x = get_int("What's x? ")
+    print(f"x is {x}")
+
+#to make the code recycleable, we can create the fn so that the prompt is customizeable
+def get_int(prompt): #prompt = the qs to ask
+    while True: 
+        try: 
+            return int(input(prompt))
+    #we dont really need to set x, its not being used anywhere else
+        except ValueError:
+            pass
+
+main()
